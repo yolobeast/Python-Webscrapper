@@ -1,16 +1,11 @@
 from flask import Flask, render_template,request,redirect,json
-from flask_flatpages import FlatPages
-from flask_frozen import Freezer
 from bs4 import BeautifulSoup
 import requests
 import sys
 import os
 
 
-app = Flask(__name__)
-app.config.from_pyfile('settings.py')
-pages = FlatPages(app)
-freezer = Freezer(app)
+app = Flask(__name__,static_url_path='/static')
 
 @app.route('/')
 def index():
@@ -92,6 +87,9 @@ def my_form_post():
     except:
         return render_template("error.html")
         
+@app.route('/about')
+def about():
+    return render_template("about.html")        
         
 if __name__ == "__main__":
     app.run() 
